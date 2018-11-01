@@ -97,8 +97,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# added by Miniconda3 installer
-export PATH="/home/ikuamike/miniconda3/bin:$PATH"
-
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
