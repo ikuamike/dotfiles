@@ -1,36 +1,30 @@
+"============================================================
+" Michael Ikua's Vim configuration
+"============================================================
 
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2017 Sep 20
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+" Avoid side effects when it was already reset.
+set nocompatible
 
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+" Allow backspacing over everything in insert mode.
+set backspace=indent,eol,start
 
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
+" Show the cursor position all the time
+set ruler
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  if has('persistent_undo')
-    set undofile	" keep an undo file (undo changes after closing)
-  endif
-endif
+" Enable syntax highlighting
+syntax on
 
-if &t_Co > 2 || has("gui_running")
-  " Switch on highlighting the last used search pattern.
-  set hlsearch
-endif
+" Enhance command-line completion
+set wildmenu
+
+" Backup, swap and undo settings
+set backup
+set undofile
+set backupdir=~/.vim/backups//
+set directory=~/.vim/swaps//
+set undodir=~/.vim/undo//
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -60,4 +54,4 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-set backupdir=~/.vim/tmp
+
