@@ -26,6 +26,9 @@ set backupdir=~/.vim/backups//
 set directory=~/.vim/swaps//
 set undodir=~/.vim/undo//
 
+" Enable line numbers
+set number
+
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
