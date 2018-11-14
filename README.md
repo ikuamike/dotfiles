@@ -1,5 +1,3 @@
-# Ikua's dotfiles
-
 My setup is used on Ubuntu 18.04 at the moment.
 
 ## Vim
