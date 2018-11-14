@@ -2,10 +2,83 @@
 " Michael Ikua's Vim configuration
 "============================================================
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-" Avoid side effects when it was already reset.
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+"======================== Vundle ============================
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"My plugins
+Plugin 'mattn/emmet-vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tmhedberg/SimpylFold'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"===================== Vundle End ===========================
+
+" Lightline Config
+let g:lightline = {
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'colorscheme': 'darcula',
+        \ 'component': {
+        \   'lineinfo': ' %3l:%-2v',
+        \ },
+        \ 'component_function': {
+        \   'readonly': 'LightlineReadonly',
+        \   'fugitive': 'LightlineFugitive'
+        \ },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' }
+        \ }
+function! LightlineReadonly()
+        return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+        if exists('*fugitive#head')
+                let branch = fugitive#head()
+                return branch !=# '' ? ''.branch : ''
+        endif
+        return ''
+endfunction
+
+
+" SimpylFold options
+let g:SimpylFold_fold_import = 0
+
+function! FoldText()
+        let foldsize = (v:foldend - v:foldstart)
+        return getline(v:foldstart).' ('.foldsize.' lines)'
+endfunction
+setlocal foldtext=FoldText()
+
+" Enable folding with the spacebar
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+" Option for tabline
+set laststatus=2
+set noshowmode
+
+"For theme
+set background=dark
+
+"==== Emmet config ====
+"redefine trigger key
+let g:user_emmet_leader_key=','
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
@@ -29,24 +102,29 @@ set undodir=~/.vim/undo//
 " Enable line numbers
 set number
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
+" Make tabs as wide as four spaces
+"set tabstop=4
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+" Highlight current line
+" set cursorline
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+" for python files
+"au BufNewFile,BufRead *.py
+"    \ set tabstop=4 |
+"    \ set softtabstop=4 |
+"    \ set shiftwidth=4 |
+"    \ set textwidth=79 |
+"    \ set expandtab |
+"    \ set autoindent |
+"    \ set fileformat=unix
 
-  augroup END
+"au BufNewFile,BufRead *.js, *.html, *.css
+"    \ set tabstop=2 |
+"    \ set softtabstop=2 |
+"    \ set shiftwidth=2 |
+"    \ set expandtab
 
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab 
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
