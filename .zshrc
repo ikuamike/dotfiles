@@ -10,7 +10,7 @@ ZSH_THEME="arrow"
 # tmux plugin settings
 export ZSH_TMUX_AUTOCONNECT="true"
 export ZSH_TMUX_AUTOSTART="true"
-
+export ZSH_TMUX_AUTOQUIT="false"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
