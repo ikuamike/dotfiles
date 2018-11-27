@@ -1,5 +1,7 @@
 My setup is used on Ubuntu 18.04 at the moment.
 
+![terminal](https://github.com/ikuamike/dotfiles/blob/master/Screenshots/terminal.png)
+
 ## Vim
 
 I use [Vundle](https://github.com/VundleVim/Vundle.vim) as my plugin manager.
