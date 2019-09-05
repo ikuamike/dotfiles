@@ -2,10 +2,25 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/ikuamike/.oh-my-zsh"
+export ZSH="/home/codefather/.oh-my-zsh"
 
 # Set zsh theme 
-ZSH_THEME="arrow"
+#ZSH_THEME="arrow"
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# Powerlevel configs
+
+zsh_custom_ip(){
+ local ip=$(ip -brief -4 a show | grep tun0 | awk {'print $3'} | cut -d / -f 1)
+ local color="%F{green}"
+ echo -n "%{$color%}$ip"
+}
+
+POWERLEVEL9K_CUSTOM_IP="zsh_custom_ip"
+POWERLEVEL9K_CUSTOM_IP_BACKGROUND="black"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator background_jobs custom_ip)
 
 # tmux plugin settings
 export ZSH_TMUX_AUTOCONNECT="true"
@@ -92,6 +107,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+alias htb="cd ~/HTB; tmux rename-window 'vpn'; openvpn ikuamike.ovpn&; tmux new-window -c ~/HTB/Boxes"
 
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
+export GOPATH=$HOME
+export GOBIN=$HOME/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin 
