@@ -4,6 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/codefather/.oh-my-zsh"
 
+unsetopt nomatch
+
 # Set zsh theme 
 #ZSH_THEME="arrow"
 
@@ -116,3 +118,8 @@ export RSHELL_PORT="/dev/ttyUSB0"
 export GOPATH=$HOME
 export GOBIN=$HOME/bin
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin 
+
+# Subdomain Enum with crt.sh 
+crtsh () {
+curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep -v crt.sh | grep -v 'Identity LIKE' | grep $1
+}
