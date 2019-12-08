@@ -29,7 +29,9 @@ filetype plugin indent on    " required
 
 "===================== Vundle End ===========================
 
-" Lightline Config
+
+"================== Lightline Config ========================
+
 let g:lightline = {
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
@@ -57,6 +59,7 @@ function! LightlineFugitive()
         return ''
 endfunction
 
+"================== Lightline Config End=======================
 
 " SimpylFold options
 let g:SimpylFold_fold_import = 0
@@ -125,7 +128,14 @@ set number
 "    \ set shiftwidth=2 |
 "    \ set expandtab
 
+" Turn on smart indenting
+filetype indent on
+set smartindent
+
+" Custom Identation config
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab 
+autocmd FileType sh setlocal shiftwidth=4 tabstop=4 
+
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
