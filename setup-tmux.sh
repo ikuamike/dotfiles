@@ -28,8 +28,8 @@ if [ -e "$HOME/.tmux.conf" ]; then
 fi
 
 cp -f "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak" 2>/dev/null || true
-cp -a ./tmux/. "$HOME"/.tmux/
-ln -sf .tmux/tmux.conf "$HOME"/.tmux.conf;
+#mkdir "${HOME}"/.tmux/
+ln -sf "${HOME}"/dotfiles/tmux/tmux.conf "${HOME}"/.tmux.conf;
 
 # Install TPM plugins.
 # TPM requires running tmux server, as soon as `tmux start-server` does not work
