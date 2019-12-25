@@ -112,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 #
 
 alias htb="cd ~/HTB; tmux rename-window 'vpn'; openvpn ikuamike.ovpn&; tmux new-window -c ~/HTB/Boxes"
-
+alias open="xdg-open"
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
 export GOPATH=$HOME
