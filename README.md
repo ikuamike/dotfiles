@@ -30,5 +30,7 @@ I use [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) and all plugins com
 
 [Ultimate Vim Configuration](https://github.com/amix/vimrc) by [@amix](https://github.com/amix).
 
+[Tmux-config](https://github.com/samoshkin/tmux-config) by [@samoshkin](https://github.com/samoshkin)
+
 Real Python article: [VIM and Python – A Match Made in Heaven](https://realpython.com/vim-and-python-a-match-made-in-heaven/).
 
