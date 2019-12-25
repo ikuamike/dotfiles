@@ -104,8 +104,8 @@ set directory=~/.vim/swaps//
 set undodir=~/.vim/undo//
 
 " Enable line numbers
-set number
-
+set nonumber
+set relativenumber
 " Make tabs as wide as four spaces
 "set tabstop=4
 
