@@ -7,8 +7,6 @@ export ZSH="${HOME}/.oh-my-zsh"
 unsetopt nomatch
 
 # Set zsh theme 
-#ZSH_THEME="arrow"
-
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powerlevel configs
