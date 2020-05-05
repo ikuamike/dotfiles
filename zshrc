@@ -26,6 +26,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator background_jobs custom_ip)
 export ZSH_TMUX_AUTOCONNECT="true"
 export ZSH_TMUX_AUTOSTART="true"
 export ZSH_TMUX_AUTOQUIT="false"
+
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -79,6 +81,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# fzf
+source "${HOME}/dotfiles/fzf.zsh"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -120,4 +125,8 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # Subdomain Enum with crt.sh 
 crtsh () {
 curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep -v crt.sh | grep -v 'Identity LIKE' | grep $1
+}
+
+jadx-gui () {
+nohup jadx-gui-1.1.0.jar $1 &>/dev/null &
 }
