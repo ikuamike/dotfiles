@@ -31,28 +31,28 @@ if ! command -v curl &> /dev/null
 then
 	echo -e "\n${Red}[-] curl could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing curl... ${Color_Off}\n"
-	apt install curl    
+	apt install curl -y    
 fi
 
 if ! command -v git &> /dev/null
 then
 	echo -e "\n${Red}[-] git could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing git... ${Color_Off}\n"
-	apt install git
+	apt install git -y
 fi
 
 if ! command -v tmux &> /dev/null
 then
 	echo -e "\n${Red}[-] tmux could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing tmux... ${Color_Off}\n"
-	apt install tmux    
+	apt install tmux -y  
 fi
 
 if ! command -v zsh &> /dev/null
 then
 	echo -e "\n${Red}[-] zsh could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing zsh... ${Color_Off}\n"
-	apt install zsh    
+	apt install zsh -y   
 fi
 
 
