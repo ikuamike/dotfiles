@@ -62,7 +62,7 @@ ln -s ~/dotfiles/zshrc ~/.zshrc
 echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
 curl -sLo /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 chmod +x /tmp/install.sh
-CHSH=yes /tmp/install.sh --unattended --keep-zshrc
+/tmp/install.sh --unattended --keep-zshrc
 rm /tmp/install.sh
 
 echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
@@ -79,3 +79,5 @@ sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
 
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
 ./setup-tmux.sh
+
+chsh -s zsh
