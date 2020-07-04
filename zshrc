@@ -11,16 +11,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Powerlevel configs
 
-zsh_custom_ip(){
- local ip=$(ip -brief -4 a show | grep tun0 | awk {'print $3'} | cut -d / -f 1)
- local color="%F{green}"
- echo -n "%{$color%}$ip"
-}
-
-POWERLEVEL9K_CUSTOM_IP="zsh_custom_ip"
-POWERLEVEL9K_CUSTOM_IP_BACKGROUND="black"
+POWERLEVEL9K_VPN_IP_FOREGROUND="green"
+POWERLEVEL9K_VPN_IP_BACKGROUND="black"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(custom_ip background_jobs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip background_jobs)
 
 # tmux plugin settings
 export ZSH_TMUX_AUTOCONNECT="true"
@@ -53,7 +47,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # fzf
-source "${HOME}/dotfiles/fzf.zsh"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # User configuration
 
