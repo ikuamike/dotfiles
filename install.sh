@@ -63,7 +63,10 @@ rm -rf /tmp/fonts
 
 
 echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -- --unattended
+curl -sLo /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+chmod +x /tmp/install.sh
+/tmp/install.sh --unattended
+rm /tmp/install.sh
 
 echo -e "\n${BGreen}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
