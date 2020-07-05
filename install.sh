@@ -56,10 +56,11 @@ then
 fi
 
 echo -e "\n${BGreen}[+] Installing Powerline fonts... ${Color_Off}\n"
-git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
-cd /tmp/fonts
-/tmp/fonts/install.sh
-rm -rf /tmp/fonts
+sudo apt install fonts-powerline
+#git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+#cd /tmp/fonts
+#/tmp/fonts/install.sh
+#rm -rf /tmp/fonts
 
 
 echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
