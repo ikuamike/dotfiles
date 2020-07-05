@@ -11,7 +11,7 @@ Yellow='\033[0;33m'       # Yellow
 Blue='\033[0;34m'         # Blue
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
-White='\033[0;37m'        # White
+White='\033[0;97m'        # White
 
 # Bold
 BBlack='\033[1;30m'       # Black
@@ -55,15 +55,18 @@ then
 	sudo apt install zsh -y   
 fi
 
+echo -e "\n${BGreen}[+] Installing Powerline fonts... ${Color_Off}\n"
+git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+cd /tmp/fonts
+/tmp/fonts/install.sh
+rm -rf /tmp/fonts
 
-echo -e "\n${BGreen}[+] Configuring zsh... ${Color_Off}\n"
-ln -s ~/dotfiles/zshrc ~/.zshrc
 
 echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
-curl -sLo /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-chmod +x /tmp/install.sh
-/tmp/install.sh --unattended --keep-zshrc
-rm /tmp/install.sh
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -- --unattended
+
+echo -e "\n${BGreen}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
+ln -sf ~/dotfiles/zshrc ~/.zshrc
 
 echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
 [ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ] && echo -e "${Green}[+] powerlevel10k already installed...skipping${Color_Off}"
