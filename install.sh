@@ -87,4 +87,4 @@ sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
 ./setup-tmux.sh
 
-chsh -s zsh
+chsh -s /usr/bin/zsh
