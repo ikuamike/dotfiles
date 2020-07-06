@@ -23,6 +23,8 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
+ZSH_CUSTOM='~/.oh-my-zsh/custom'
+
 echo -e "\n${BWhite}[*] Setting up your terminal... ${Color_Off}"
 
 echo -e "\n${BGreen}[*] Installing dependencies... ${Color_Off}"
@@ -56,35 +58,49 @@ then
 fi
 
 echo -e "\n${BGreen}[+] Installing Powerline fonts... ${Color_Off}\n"
-sudo apt install fonts-powerline
-#git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
-#cd /tmp/fonts
-#/tmp/fonts/install.sh
-#rm -rf /tmp/fonts
-
+git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+cd /tmp/fonts
+/tmp/fonts/install.sh
+rm -rf /tmp/fonts
 
 echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
-curl -sLo /tmp/install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-chmod +x /tmp/install.sh
-/tmp/install.sh --unattended
-rm /tmp/install.sh
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -- --keep-zshrc
 
 echo -e "\n${BGreen}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 
-echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
-[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k ] && echo -e "${Green}[+] powerlevel10k already installed...skipping${Color_Off}"
-git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
+	echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
+	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+else
+	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
+fi
 
-echo -e "\n${Green}[+] Installing zsh-syntax-highlighting... ${Color_Off}\n"
-git clone --quiet https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
+	echo -e "\n${Yellow}[+] Installing zsh-syntax-highlighting... ${Color_Off}\n"
+	git clone --quiet https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+else
+	echo -e "${Green}[*] zsh-syntax-highlighting already installed...skipping${Color_Off}"
+fi
 
-echo -e "\n${Green}[+] Installing fzf... ${Color_Off}\n"
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
-~/.fzf/install --no-bash --no-fish --key-bindings --completion --no-update-rc
+if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
+	echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
+	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+else
+	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
+fi
+
+if [ ! -d ~/.fzf ]; then
+	echo -e "\n${Green}[+] Installing fzf... ${Color_Off}\n"
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
+	~/.fzf/install --no-bash --no-fish --key-bindings --completion --no-update-rc
+else
+	echo -e "${Green}[*] fzf already installed...skipping${Color_Off}"
+fi
 
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
 ./setup-tmux.sh
 
-chsh -s /usr/bin/zsh
+chsh -s $(which zsh)
+
