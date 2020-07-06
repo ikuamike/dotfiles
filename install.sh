@@ -34,6 +34,8 @@ then
 	echo -e "\n${Red}[-] curl could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing curl... ${Color_Off}\n"
 	sudo apt install curl -y    
+else
+	echo -e "${Green}[+] curl already installed...skipping ${Color_Off}\n"
 fi
 
 if ! command -v git &> /dev/null
@@ -41,6 +43,8 @@ then
 	echo -e "\n${Red}[-] git could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing git... ${Color_Off}\n"
 	sudo apt install git -y
+else
+	echo -e "${Green}[+] git already installed...skipping ${Color_Off}\n"
 fi
 
 if ! command -v tmux &> /dev/null
@@ -48,6 +52,8 @@ then
 	echo -e "\n${Red}[-] tmux could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing tmux... ${Color_Off}\n"
 	sudo apt install tmux -y  
+else
+	echo -e "${Green}[+] tmux already installed...skipping ${Color_Off}\n"
 fi
 
 if ! command -v zsh &> /dev/null
@@ -55,22 +61,24 @@ then
 	echo -e "\n${Red}[-] zsh could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing zsh... ${Color_Off}\n"
 	sudo apt install zsh -y   
+else
+	echo -e "${Green}[+] zsh already installed...skipping ${Color_Off}\n"
 fi
 
-echo -e "\n${BGreen}[+] Installing Powerline fonts... ${Color_Off}\n"
+echo -e "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
 git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
 cd /tmp/fonts
 /tmp/fonts/install.sh
 rm -rf /tmp/fonts
 
-echo -e "\n${Green}[+] Installing ohmyzsh... ${Color_Off}\n"
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -- --keep-zshrc
+echo -e "\n${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
-echo -e "\n${BGreen}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
+echo -e "\n${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
-	echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
+	echo -e "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}"
 	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 else
 	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
@@ -84,14 +92,14 @@ else
 fi
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
-	echo -e "\n${Green}[+] Installing powerlevel10k... ${Color_Off}"
+	echo -e "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}"
 	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 else
 	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
 fi
 
 if [ ! -d ~/.fzf ]; then
-	echo -e "\n${Green}[+] Installing fzf... ${Color_Off}\n"
+	echo -e "\n${Yellow}[+] Installing fzf... ${Color_Off}\n"
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
 	~/.fzf/install --no-bash --no-fish --key-bindings --completion --no-update-rc
@@ -100,7 +108,7 @@ else
 fi
 
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
-./setup-tmux.sh
+~/dotfiles/setup-tmux.sh
 
 chsh -s $(which zsh)
 
