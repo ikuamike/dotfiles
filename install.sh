@@ -44,7 +44,7 @@ then
 	echo -e "${Yellow}[+] Installing git... ${Color_Off}\n"
 	sudo apt install git -y
 else
-	echo -e "${Green}[+] git already installed...skipping ${Color_Off}"
+	echo -e "${Green}[*] git already installed...skipping ${Color_Off}"
 fi
 
 if ! command -v tmux &> /dev/null
@@ -53,7 +53,7 @@ then
 	echo -e "${Yellow}[+] Installing tmux... ${Color_Off}\n"
 	sudo apt install tmux -y  
 else
-	echo -e "${Green}[+] tmux already installed...skipping ${Color_Off}"
+	echo -e "${Green}[*] tmux already installed...skipping ${Color_Off}"
 fi
 
 if ! command -v zsh &> /dev/null
@@ -62,7 +62,7 @@ then
 	echo -e "${Yellow}[+] Installing zsh... ${Color_Off}\n"
 	sudo apt install zsh -y   
 else
-	echo -e "${Green}[+] zsh already installed...skipping ${Color_Off}\n"
+	echo -e "${Green}[*] zsh already installed...skipping ${Color_Off}"
 fi
 
 echo -e "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
@@ -71,10 +71,15 @@ chmod +x /tmp/fonts/install.sh
 /tmp/fonts/install.sh
 rm -rf /tmp/fonts
 
-echo -e "\n${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+if [ ! -d ${HOME}/.oh-my-zsh ]; then
+	echo -e "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+else
+	echo -e "${BGreen}[*] ohmyzsh already installed...skipping${Color_Off}"
+fi
 
-echo -e "\n${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
+
+echo -e "${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
