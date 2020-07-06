@@ -27,33 +27,33 @@ ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 echo -e "\n${BWhite}[*] Setting up your terminal... ${Color_Off}"
 
-echo -e "\n${BGreen}[*] Installing dependencies... ${Color_Off}"
+echo -e "\n${BGreen}[*] Installing dependencies... ${Color_Off}\n"
 
 if ! command -v curl &> /dev/null
 then
-	echo -e "\n${Red}[-] curl could not be found ${Color_Off}"
+	echo -e "${Red}[-] curl could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing curl... ${Color_Off}\n"
 	sudo apt install curl -y    
 else
-	echo -e "${Green}[+] curl already installed...skipping ${Color_Off}\n"
+	echo -e "${Green}[+] curl already installed...skipping ${Color_Off}"
 fi
 
 if ! command -v git &> /dev/null
 then
-	echo -e "\n${Red}[-] git could not be found ${Color_Off}"
+	echo -e "${Red}[-] git could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing git... ${Color_Off}\n"
 	sudo apt install git -y
 else
-	echo -e "${Green}[+] git already installed...skipping ${Color_Off}\n"
+	echo -e "${Green}[+] git already installed...skipping ${Color_Off}"
 fi
 
 if ! command -v tmux &> /dev/null
 then
-	echo -e "\n${Red}[-] tmux could not be found ${Color_Off}"
+	echo -e "${Red}[-] tmux could not be found ${Color_Off}"
 	echo -e "${Yellow}[+] Installing tmux... ${Color_Off}\n"
 	sudo apt install tmux -y  
 else
-	echo -e "${Green}[+] tmux already installed...skipping ${Color_Off}\n"
+	echo -e "${Green}[+] tmux already installed...skipping ${Color_Off}"
 fi
 
 if ! command -v zsh &> /dev/null
@@ -72,7 +72,7 @@ cd /tmp/fonts
 rm -rf /tmp/fonts
 
 echo -e "\n${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 echo -e "\n${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
