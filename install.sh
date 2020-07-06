@@ -23,7 +23,7 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
-ZSH_CUSTOM='~/.oh-my-zsh/custom'
+ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 echo -e "\n${BWhite}[*] Setting up your terminal... ${Color_Off}"
 
