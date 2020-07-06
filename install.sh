@@ -75,9 +75,8 @@ if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	echo -e "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 else
-	echo -e "${BGreen}[*] ohmyzsh already installed...skipping${Color_Off}"
+	echo -e "\n${Green}[*] ohmyzsh already installed...skipping${Color_Off}"
 fi
-
 
 echo -e "${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
@@ -86,7 +85,7 @@ if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
 	echo -e "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}"
 	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 else
-	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
+	echo -e "${Green}[*] powerlevel10k already installed...skipping${Color_Off}"
 fi
 
 if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
@@ -94,13 +93,6 @@ if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
 	git clone --quiet https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 else
 	echo -e "${Green}[*] zsh-syntax-highlighting already installed...skipping${Color_Off}"
-fi
-
-if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
-	echo -e "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}"
-	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
-else
-	echo -e "${Green}[*] Powerlevel10k already installed...skipping${Color_Off}"
 fi
 
 if [ ! -d ~/.fzf ]; then
@@ -115,5 +107,7 @@ fi
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
 ${HOME}/dotfiles/setup-tmux.sh
 
-chsh -s $(which zsh)
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+	chsh -s $(which zsh)
+fi
 
