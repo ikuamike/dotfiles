@@ -67,12 +67,12 @@ fi
 
 echo -e "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
 git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
-cd /tmp/fonts
+chmod +x /tmp/fonts/install.sh
 /tmp/fonts/install.sh
 rm -rf /tmp/fonts
 
 echo -e "\n${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
 echo -e "\n${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
