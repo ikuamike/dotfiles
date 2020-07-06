@@ -23,7 +23,7 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
-ZSH_CUSTOM=~/.oh-my-zsh/custom
+ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
 
 echo -e "\n${BWhite}[*] Setting up your terminal... ${Color_Off}"
 
@@ -72,7 +72,7 @@ cd /tmp/fonts
 rm -rf /tmp/fonts
 
 echo -e "\n${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 echo -e "\n${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
@@ -108,7 +108,7 @@ else
 fi
 
 echo -e "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
-~/dotfiles/setup-tmux.sh
+${HOME}/dotfiles/setup-tmux.sh
 
 chsh -s $(which zsh)
 
