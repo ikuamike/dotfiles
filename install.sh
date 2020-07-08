@@ -33,7 +33,11 @@ if ! command -v curl &> /dev/null
 then
 	printf "${Red}[-] curl could not be found ${Color_Off}\n"
 	printf "${Yellow}[+] Installing curl... ${Color_Off}\n"
-	sudo apt install curl -y    
+	if [ $(id -u) == 0 ]; then
+		apt install curl -y
+	else
+		sudo apt install curl -y
+	fi
 else
 	printf "${Green}[*] curl already installed...skipping ${Color_Off}\n"
 fi
@@ -42,7 +46,11 @@ if ! command -v git &> /dev/null
 then
 	printf "${Red}[-] git could not be found ${Color_Off}\n"
 	printf "${Yellow}[+] Installing git... ${Color_Off}\n"
-	sudo apt install git -y
+	if [ $(id -u) == 0 ]; then
+		apt install git -y
+	else
+		sudo apt install git -y
+	fi
 else
 	printf "${Green}[*] git already installed...skipping ${Color_Off}\n"
 fi
@@ -51,7 +59,11 @@ if ! command -v tmux &> /dev/null
 then
 	printf "${Red}[-] tmux could not be found ${Color_Off}\n"
 	printf "${Yellow}[+] Installing tmux... ${Color_Off}\n"
-	sudo apt install tmux -y  
+	if [ $(id -u) == 0 ]; then
+		apt install tmux -y
+	else
+		sudo apt install tmux -y
+	fi
 else
 	printf "${Green}[*] tmux already installed...skipping ${Color_Off}\n"
 fi
@@ -60,16 +72,30 @@ if ! command -v zsh &> /dev/null
 then
 	printf "\n${Red}[-] zsh could not be found ${Color_Off}\n"
 	printf "${Yellow}[+] Installing zsh... ${Color_Off}\n"
-	sudo apt install zsh -y   
+	if [ $(id -u) == 0 ]; then
+		apt install zsh -y
+	else
+		sudo apt install zsh -y
+	fi
 else
 	printf "${Green}[*] zsh already installed...skipping ${Color_Off}\n"
 fi
 
-printf "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
-git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
-chmod +x /tmp/fonts/install.sh
-/tmp/fonts/install.sh
-rm -rf /tmp/fonts
+if ls ~/.local/share/fonts | grep Powerline >/dev/null; [ $? -eq 0 ]
+then
+	printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
+else
+	if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+	then
+		printf "${Cyan}[*] In a docker container...skipping ${Color_Off}\n"
+	else
+		printf "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
+		git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+		chmod +x /tmp/fonts/install.sh
+		/tmp/fonts/install.sh
+		rm -rf /tmp/fonts
+	fi
+fi
 
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
