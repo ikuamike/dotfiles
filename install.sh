@@ -99,7 +99,7 @@ fi
 
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --skip-chsh
 else
 	printf "\n${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
 fi
