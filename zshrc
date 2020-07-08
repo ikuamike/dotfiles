@@ -26,10 +26,11 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context background_jobs)
 # tmux plugin settings
 if [[ -n $SSH_CONNECTION ]]; then
 	export ZSH_TMUX_AUTOCONNECT="false"
+	export ZSH_TMUX_AUTOSTART="false"
 else
 	export ZSH_TMUX_AUTOCONNECT="true"
+	export ZSH_TMUX_AUTOSTART="true"
 fi
-export ZSH_TMUX_AUTOSTART="true"
 export ZSH_TMUX_AUTOQUIT="false"
 
 # zsh syntax highlighting
