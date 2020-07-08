@@ -13,7 +13,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_VPN_IP_FOREGROUND="green"
 POWERLEVEL9K_VPN_IP_BACKGROUND="black"
-POWERLEVEL9K_CONTEXT_TEMPLATE="`$(awk -F/ '$2 == "docker"' /proc/self/cgroup | read; [ $? -eq 0 ] && echo docker \~\ $(hostname)) || echo ssh \~\ $(hostname)`"
+POWERLEVEL9K_CONTEXT_TEMPLATE="`awk -F/ '$2 == "docker"' /proc/self/cgroup | read; [ $? -eq 0 ] && echo docker \~\ $(hostname) || echo ssh \~\ $(hostname)`"
 typeset -g POWERLEVEL9K_CONTEXT_DEFAULT_CONTENT_EXPANSION=
 
 POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
