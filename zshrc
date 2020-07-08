@@ -24,7 +24,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context background_jobs)
 
 # tmux plugin settings
-if [[ -n $SSH_CONNECTION ]]; then
+if [ -n "$SSH_CONNECTION" ] || [ -n "$(awk -F/ '$2 == "docker"' /proc/self/cgroup)" ] ; then
 	export ZSH_TMUX_AUTOCONNECT="false"
 	export ZSH_TMUX_AUTOSTART="false"
 else
