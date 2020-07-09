@@ -3,6 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
+export IS_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 
 unsetopt nomatch
 
@@ -13,7 +14,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_VPN_IP_FOREGROUND="green"
 POWERLEVEL9K_VPN_IP_BACKGROUND="black"
-POWERLEVEL9K_CONTEXT_TEMPLATE="`awk -F/ '$2 == "docker"' /proc/self/cgroup | read; [ $? -eq 0 ] && echo docker \~\ $(hostname) || echo ssh \~\ $(hostname)`"
+POWERLEVEL9K_CONTEXT_TEMPLATE="`[ -n "$IS_DOCKER" ] && echo docker \~\ $(hostname) || echo ssh \~\ $(hostname)`"
 typeset -g POWERLEVEL9K_CONTEXT_DEFAULT_CONTENT_EXPANSION=
 
 POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
@@ -24,7 +25,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context background_jobs)
 
 # tmux plugin settings
-if [ -n "$SSH_CONNECTION" ] || [ -n "$(awk -F/ '$2 == "docker"' /proc/self/cgroup)" ] ; then
+if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ] ; then
 	export ZSH_TMUX_AUTOCONNECT="false"
 	export ZSH_TMUX_AUTOSTART="false"
 else
