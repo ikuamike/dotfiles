@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
-export IS_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup | read; [ $? -eq 0 ] && echo "true")
+export IS_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 
 unsetopt nomatch
 
