@@ -55,6 +55,7 @@ plugins=(
   tmux
   zsh-syntax-highlighting
   docker
+  sudo
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,8 +99,9 @@ alias open="xdg-open"
 export RSHELL_PORT="/dev/ttyUSB0"
 
 export GOPATH=$HOME
+export GOROOT=/usr/local/go
 export GOBIN=$HOME/bin
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin 
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin 
 
 # Subdomain Enum with crt.sh 
 crtsh () {
