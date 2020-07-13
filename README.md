@@ -1,4 +1,4 @@
-My setup is used on Ubuntu 18.04 at the moment.
+My setup is used on Kali Linux at the moment.
 
 ![terminal](https://github.com/ikuamike/dotfiles/blob/master/Screenshots/terminal.png)
 
@@ -7,7 +7,6 @@ My setup is used on Ubuntu 18.04 at the moment.
 I use [Vundle](https://github.com/VundleVim/Vundle.vim) as my plugin manager.
 
 #### Plugins
-- [Emmet-vim](https://github.com/mattn/emmet-vim) -  vim plug-in which provides support for expanding abbreviations similar to emmet.
 - [Lightline.vim](https://github.com/itchyny/lightline.vim) - A light and configurable statusline/tabline plugin for Vim.
 - [SimplylFold](https://github.com/tmhedberg/SimpylFold) -  Python code folding for Vim.
 - [Vim-fugitive](https://github.com/tpope/vim-fugitive) - An awesome Git wrapper.
