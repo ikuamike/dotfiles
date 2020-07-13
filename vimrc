@@ -17,12 +17,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "My plugins
-Plugin 'mattn/emmet-vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tmhedberg/SimpylFold'
 Plugin 'psliwka/vim-smoothie'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -80,10 +78,6 @@ set noshowmode
 
 "For theme
 set background=dark
-
-"==== Emmet config ====
-"redefine trigger key
-let g:user_emmet_leader_key=','
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
