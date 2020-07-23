@@ -23,8 +23,9 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
-# functions
-
+#==================#
+# 	functions	   #
+#==================#
 install () {
 if ! command -v $1 &> /dev/null
 then
@@ -39,7 +40,10 @@ else
 	printf "${Green}[*] $1 already installed...skipping ${Color_Off}\n"
 fi
 }
-
+configure () {
+printf "${Blue}[+] Configuring $1: ${White}Creating $1rc symlink to ~/.$1rc ... ${Color_Off}\n"
+ln -sf ~/dotfiles/$1rc ~/.$1rc
+}
 ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
 
 printf "\n${BWhite}[*] Setting up your terminal... ${Color_Off}\n"
@@ -52,6 +56,7 @@ install tmux
 install zsh
 install xcape
 install xclip
+install vim
 
 #==================#
 # Powerline-fonts  #
@@ -79,14 +84,18 @@ if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
 else
-	printf "\n${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
+	printf "${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
 fi
 
 #==================#
-# 	zsh-configs	   #
+# 	vim-config	   #
 #==================#
-printf "${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
-ln -sf ~/dotfiles/zshrc ~/.zshrc
+configure vim
+
+#==================#
+# 	zsh-config	   #
+#==================#
+configure zsh
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
 	printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"
@@ -114,7 +123,7 @@ else
 	printf "${Green}[*] fzf already installed...skipping${Color_Off}\n"
 fi
 
-printf "\n${Green}[+] Setting up tmux... ${Color_Off}\n"
+printf "\n${Blue}[+] Setting up tmux... ${Color_Off}\n"
 ${HOME}/dotfiles/setup-tmux.sh
 
 if [ "$(basename "$SHELL")" != "zsh" ]; then
