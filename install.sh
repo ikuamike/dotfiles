@@ -87,7 +87,6 @@ if [ ! -d ${HOME}/.vim/bundle ]; then
 else
 	printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
 fi
-vim +PluginInstall +qall
 
 #==================#
 # 	vim-config	   #
@@ -96,6 +95,7 @@ mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
 mkdir -p ${HOME}/.vim/undo
 configure vim
+vim +PluginInstall +qall
 
 #==================#
 # 	  ohmyzsh	   #
