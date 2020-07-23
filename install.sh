@@ -83,7 +83,7 @@ fi
 #==================#
 if [ ! -d ${HOME}/.vim/bundle ]; then
 	printf "${Yellow}[+] Installing vundle... ${Color_Off}\n"
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 else
 	printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
 fi
@@ -95,7 +95,7 @@ mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
 mkdir -p ${HOME}/.vim/undo
 configure vim
-vim +PluginInstall +qall
+vim +PluginList +qall --not-a-term &>/dev/null
 
 #==================#
 # 	  ohmyzsh	   #
@@ -111,6 +111,7 @@ fi
 # 	zsh-config	   #
 #==================#
 configure zsh
+ln -sf ~/dotfiles/zshenv ~/.zshenv
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
 	printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"
