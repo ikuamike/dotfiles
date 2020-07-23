@@ -23,64 +23,39 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
+# functions
+
+install () {
+if ! command -v $1 &> /dev/null
+then
+	printf "\n${Red}[-] $1 could not be found ${Color_Off}\n"
+	printf "${Yellow}[+] Installing $1... ${Color_Off}\n"
+	if [ $(id -u) == 0 ]; then
+		apt install $1 -y
+	else
+		sudo apt install $1 -y
+	fi
+else
+	printf "${Green}[*] $1 already installed...skipping ${Color_Off}\n"
+fi
+}
+
 ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
 
 printf "\n${BWhite}[*] Setting up your terminal... ${Color_Off}\n"
 
 printf "\n${BGreen}[*] Installing dependencies... ${Color_Off}\n"
 
-if ! command -v curl &> /dev/null
-then
-	printf "${Red}[-] curl could not be found ${Color_Off}\n"
-	printf "${Yellow}[+] Installing curl... ${Color_Off}\n"
-	if [ $(id -u) == 0 ]; then
-		apt install curl -y
-	else
-		sudo apt install curl -y
-	fi
-else
-	printf "${Green}[*] curl already installed...skipping ${Color_Off}\n"
-fi
+install curl
+install git
+install tmux
+install zsh
+install xcape
+install xclip
 
-if ! command -v git &> /dev/null
-then
-	printf "${Red}[-] git could not be found ${Color_Off}\n"
-	printf "${Yellow}[+] Installing git... ${Color_Off}\n"
-	if [ $(id -u) == 0 ]; then
-		apt install git -y
-	else
-		sudo apt install git -y
-	fi
-else
-	printf "${Green}[*] git already installed...skipping ${Color_Off}\n"
-fi
-
-if ! command -v tmux &> /dev/null
-then
-	printf "${Red}[-] tmux could not be found ${Color_Off}\n"
-	printf "${Yellow}[+] Installing tmux... ${Color_Off}\n"
-	if [ $(id -u) == 0 ]; then
-		apt install tmux -y
-	else
-		sudo apt install tmux -y
-	fi
-else
-	printf "${Green}[*] tmux already installed...skipping ${Color_Off}\n"
-fi
-
-if ! command -v zsh &> /dev/null
-then
-	printf "\n${Red}[-] zsh could not be found ${Color_Off}\n"
-	printf "${Yellow}[+] Installing zsh... ${Color_Off}\n"
-	if [ $(id -u) == 0 ]; then
-		apt install zsh -y
-	else
-		sudo apt install zsh -y
-	fi
-else
-	printf "${Green}[*] zsh already installed...skipping ${Color_Off}\n"
-fi
-
+#==================#
+# Powerline-fonts  #
+#==================#
 if ls ~/.local/share/fonts | grep Powerline >/dev/null; [ $? -eq 0 ]
 then
 	printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
@@ -97,6 +72,9 @@ else
 	fi
 fi
 
+#==================#
+# 	  ohmyzsh	   #
+#==================#
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
 	printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
@@ -104,6 +82,9 @@ else
 	printf "\n${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
 fi
 
+#==================#
+# 	zsh-configs	   #
+#==================#
 printf "${Blue}[+] Configuring zsh: ${White}Creating zshrc symlink to ~/.zshrc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 
@@ -121,6 +102,9 @@ else
 	printf "${Green}[*] zsh-syntax-highlighting already installed...skipping${Color_Off}\n"
 fi
 
+#==================#
+# 		fzf		   #
+#==================#
 if [ ! -d ~/.fzf ]; then
 	printf "\n${Yellow}[+] Installing fzf... ${Color_Off}\n"
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
