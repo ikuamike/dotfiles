@@ -77,6 +77,22 @@ else
 	fi
 fi
 
+
+#==================#
+# 	  vundle	   #
+#==================#
+if [ ! -d ${HOME}/.vim/bundle ]; then
+	printf "${Yellow}[+] Installing vundle... ${Color_Off}\n"
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+	printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
+fi
+
+#==================#
+# 	vim-config	   #
+#==================#
+configure vim
+
 #==================#
 # 	  ohmyzsh	   #
 #==================#
@@ -86,11 +102,6 @@ if [ ! -d ${HOME}/.oh-my-zsh ]; then
 else
 	printf "${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
 fi
-
-#==================#
-# 	vim-config	   #
-#==================#
-configure vim
 
 #==================#
 # 	zsh-config	   #
