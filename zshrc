@@ -98,7 +98,6 @@ alias open="xdg-open"
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
 
-export GOPATH=$HOME
 export GOROOT=/usr/local/go
 export GOBIN=$HOME/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin 
