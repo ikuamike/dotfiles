@@ -112,7 +112,7 @@ fi
 #==================#
 configure zsh
 ln -sf ~/dotfiles/zshenv ~/.zshenv
-if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+if awk -F/ '$2 == "docker"' /proc/self/cgroup | read; then
 	sed -i s/#POWERLEVEL9K_DISABLE_GITSTATUS=true/POWERLEVEL9K_DISABLE_GITSTATUS=true/ zshrc
 fi
 
