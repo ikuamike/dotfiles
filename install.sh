@@ -61,7 +61,7 @@ install vim
 #==================#
 # Powerline-fonts  #
 #==================#
-if ls ~/.local/share/fonts | grep Powerline >/dev/null; [ $? -eq 0 ]
+if ls ~/.local/share/fonts 2>/dev/null | grep Powerline >/dev/null; [ $? -eq 0 ]
 then
 	printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
 else
@@ -112,6 +112,8 @@ fi
 #==================#
 configure zsh
 ln -sf ~/dotfiles/zshenv ~/.zshenv
+if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+	sed -i s/#POWERLEVEL9K_DISABLE_GITSTATUS=true/POWERLEVEL9K_DISABLE_GITSTATUS=true/ zshrc
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
 	printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"

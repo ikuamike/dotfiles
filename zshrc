@@ -24,6 +24,8 @@ POWERLEVEL9K_ROOT_ICON='%B#'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context background_jobs)
 
+#POWERLEVEL9K_DISABLE_GITSTATUS=true
+
 # tmux plugin settings
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ] ; then
 	export ZSH_TMUX_AUTOCONNECT="false"
