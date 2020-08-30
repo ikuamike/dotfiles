@@ -112,9 +112,6 @@ fi
 #==================#
 configure zsh
 ln -sf ~/dotfiles/zshenv ~/.zshenv
-if awk -F/ '$2 == "docker"' /proc/self/cgroup | read; then
-	sed -i s/#POWERLEVEL9K_DISABLE_GITSTATUS=true/POWERLEVEL9K_DISABLE_GITSTATUS=true/ zshrc
-fi
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
 	printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"
