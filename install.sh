@@ -23,21 +23,23 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
+IN_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
+
 #==================#
-# 	functions	   #
+#   functions      #
 #==================#
 install () {
 if ! command -v $1 &> /dev/null
 then
-	printf "\n${Red}[-] $1 could not be found ${Color_Off}\n"
-	printf "${Yellow}[+] Installing $1... ${Color_Off}\n"
-	if [ $(id -u) == 0 ]; then
-		apt install $1 -y
-	else
-		sudo apt install $1 -y
-	fi
+    printf "\n${Red}[-] $1 could not be found ${Color_Off}\n"
+    printf "${Yellow}[+] Installing $1... ${Color_Off}\n"
+    if [ $(id -u) == 0 ]; then
+        apt install $1 -y
+    else
+        sudo apt install $1 -y
+    fi
 else
-	printf "${Green}[*] $1 already installed...skipping ${Color_Off}\n"
+    printf "${Green}[*] $1 already installed...skipping ${Color_Off}\n"
 fi
 }
 configure () {
@@ -63,33 +65,33 @@ install vim
 #==================#
 if ls ~/.local/share/fonts 2>/dev/null | grep Powerline >/dev/null; [ $? -eq 0 ]
 then
-	printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
+    printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
 else
-	if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
-	then
-		printf "${Cyan}[*] In a docker container...skipping ${Color_Off}\n"
-	else
-		printf "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
-		git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
-		chmod +x /tmp/fonts/install.sh
-		/tmp/fonts/install.sh
-		rm -rf /tmp/fonts
-	fi
+    if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+    then
+        printf "${Cyan}[*] In a docker container...skipping ${Color_Off}\n"
+    else
+        printf "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
+        git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+        chmod +x /tmp/fonts/install.sh
+        /tmp/fonts/install.sh
+        rm -rf /tmp/fonts
+    fi
 fi
 
 
 #==================#
-# 	  vundle	   #
+#     vundle       #
 #==================#
 if [ ! -d ${HOME}/.vim/bundle ]; then
-	printf "${Yellow}[+] Installing vundle... ${Color_Off}\n"
-	git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    printf "${Yellow}[+] Installing vundle... ${Color_Off}\n"
+    git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 else
-	printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
+    printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
 fi
 
 #==================#
-# 	vim-config	   #
+#   vim-config     #
 #==================#
 mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
@@ -98,54 +100,57 @@ configure vim
 vim +PluginList +qall --not-a-term &>/dev/null
 
 #==================#
-# 	  ohmyzsh	   #
+#     ohmyzsh      #
 #==================#
 if [ ! -d ${HOME}/.oh-my-zsh ]; then
-	printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
+    printf "${Yellow}[+] Installing ohmyzsh... ${Color_Off}\n"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
 else
-	printf "${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
+    printf "${Green}[*] ohmyzsh already installed...skipping${Color_Off}\n"
 fi
 
 #==================#
-# 	zsh-config	   #
+#   zsh-config     #
 #==================#
 configure zsh
 ln -sf ~/dotfiles/zshenv ~/.zshenv
 
 if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
-	printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"
-	git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+    printf "\n${Yellow}[+] Installing powerlevel10k... ${Color_Off}\n"
+    git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
 else
-	printf "${Green}[*] powerlevel10k already installed...skipping${Color_Off}\n"
+    printf "${Green}[*] powerlevel10k already installed...skipping${Color_Off}\n"
 fi
 
 if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
-	printf "\n${Yellow}[+] Installing zsh-syntax-highlighting... ${Color_Off}\n"
-	git clone --quiet https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+    printf "\n${Yellow}[+] Installing zsh-syntax-highlighting... ${Color_Off}\n"
+    git clone --quiet https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 else
-	printf "${Green}[*] zsh-syntax-highlighting already installed...skipping${Color_Off}\n"
+    printf "${Green}[*] zsh-syntax-highlighting already installed...skipping${Color_Off}\n"
 fi
 
 #==================#
-# 		fzf		   #
+#       fzf        #
 #==================#
 if [ ! -d ~/.fzf ]; then
-	printf "\n${Yellow}[+] Installing fzf... ${Color_Off}\n"
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
-	~/.fzf/install --no-bash --no-fish --key-bindings --completion --no-update-rc
+    printf "\n${Yellow}[+] Installing fzf... ${Color_Off}\n"
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    sed -i 's/\<curl\>/curl -s/g' ~/.fzf/install
+    ~/.fzf/install --no-bash --no-fish --key-bindings --completion --no-update-rc
 else
-	printf "${Green}[*] fzf already installed...skipping${Color_Off}\n"
+    printf "${Green}[*] fzf already installed...skipping${Color_Off}\n"
 fi
 
 printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
 echo 35 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 
-printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
-${HOME}/dotfiles/setup-tmux.sh
+if [ -n "$IN_DOCKER" ] 
+then
+	printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
+	${HOME}/dotfiles/setup-tmux.sh
+fi
 
 if [ "$(basename "$SHELL")" != "zsh" ]; then
-	chsh -s $(which zsh)
+    chsh -s $(which zsh)
 fi
 
