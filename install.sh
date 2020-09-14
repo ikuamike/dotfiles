@@ -56,6 +56,7 @@ install curl
 install git
 install tmux
 install zsh
+install vim
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
@@ -65,7 +66,6 @@ else
 	install xclip
 fi
 
-install vim
 
 #==================#
 # Powerline-fonts  #
@@ -148,11 +148,13 @@ else
     printf "${Green}[*] fzf already installed...skipping${Color_Off}\n"
 fi
 
-printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
-echo 35 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
-
-if [ -n "$IN_DOCKER" ] 
+if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
+	echo ""
+else
+	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
+	echo 35 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
+
 	printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
 	${HOME}/dotfiles/setup-tmux.sh
 fi
