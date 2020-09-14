@@ -56,8 +56,13 @@ install curl
 install git
 install tmux
 install zsh
-install xcape
-install xclip
+
+if [ -z "$SSH_CONNECTION" ] || [ -z "$IS_DOCKER" ]
+then
+	install xcape
+	install xclip
+fi
+
 install vim
 
 #==================#
@@ -67,9 +72,9 @@ if ls ~/.local/share/fonts 2>/dev/null | grep Powerline >/dev/null; [ $? -eq 0 ]
 then
     printf "${Green}[*] Powerline fonts already installed...skipping ${Color_Off}\n"
 else
-    if awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+    if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
     then
-        printf "${Cyan}[*] In a docker container...skipping ${Color_Off}\n"
+        printf "${Cyan}[*] In a docker container or ssh connection...skipping ${Color_Off}\n"
     else
         printf "\n${Yellow}[+] Installing Powerline fonts... ${Color_Off}\n"
         git clone --quiet https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
