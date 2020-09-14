@@ -154,7 +154,12 @@ then
 else
 	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
 	echo 35 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
+fi
 
+if [ -n "$IN_DOCKER" ] 
+then
+	echo ""
+else
 	printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
 	${HOME}/dotfiles/setup-tmux.sh
 fi
