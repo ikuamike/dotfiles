@@ -19,7 +19,7 @@ fi
 
 if [ ! -e "${HOME}/.tmux/plugins/tpm" ]; then
   printf "WARNING: Cannot find TPM (Tmux Plugin Manager) \
- at default location: \${HOME}/.tmux/plugins/tpm.\n"
+ at default location: ${HOME}/.tmux/plugins/tpm.\n"
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
