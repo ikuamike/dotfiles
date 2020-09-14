@@ -35,7 +35,6 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ] ; then
 else
 	export ZSH_TMUX_AUTOCONNECT="true"
 	export ZSH_TMUX_AUTOSTART="true"
-	source ~/dotfiles/axiom.zsh
 fi
 export ZSH_TMUX_AUTOQUIT="false"
 
@@ -118,3 +117,9 @@ nohup jadx-gui-1.1.0.jar $1 &>/dev/null &
 burp () {
 nohup ~/burp_suite/burp.sh &>/dev/null &
 }
+if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
+then
+	echo ""
+else
+	source ~/dotfiles/axiom.zsh
+fi
