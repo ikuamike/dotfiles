@@ -57,8 +57,10 @@ install git
 install tmux
 install zsh
 
-if [ -z "$SSH_CONNECTION" ] || [ -z "$IS_DOCKER" ]
+if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
+	echo ""
+else
 	install xcape
 	install xclip
 fi
