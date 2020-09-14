@@ -118,3 +118,4 @@ nohup jadx-gui-1.1.0.jar $1 &>/dev/null &
 burp () {
 nohup ~/burp_suite/burp.sh &>/dev/null &
 }
+source ~/dotfiles/axiom.zsh
