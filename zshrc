@@ -35,6 +35,7 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ] ; then
 else
 	export ZSH_TMUX_AUTOCONNECT="true"
 	export ZSH_TMUX_AUTOSTART="true"
+	source ~/dotfiles/axiom.zsh
 fi
 export ZSH_TMUX_AUTOQUIT="false"
 
@@ -44,7 +45,6 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 
 ZSH_HIGHLIGHT_STYLES[path]='none'
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
-
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -118,4 +118,3 @@ nohup jadx-gui-1.1.0.jar $1 &>/dev/null &
 burp () {
 nohup ~/burp_suite/burp.sh &>/dev/null &
 }
-source ~/dotfiles/axiom.zsh
