@@ -132,6 +132,7 @@ set smartindent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab 
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab 
 autocmd FileType sh setlocal shiftwidth=4 tabstop=4 
+autocmd FileType zsh setlocal shiftwidth=4 tabstop=4
 
 " Add optional packages.
 "
