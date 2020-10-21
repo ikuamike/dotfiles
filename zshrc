@@ -121,5 +121,7 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
 	echo ""
 else
-	source ~/dotfiles/axiom.zsh
+        if [ -d ~/.axiom ];then
+                source ~/dotfiles/axiom.zsh
+        fi
 fi
