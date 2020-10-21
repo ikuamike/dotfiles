@@ -153,7 +153,7 @@ then
 	echo ""
 else
 	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
-	echo 35 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
+	echo 36 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 fi
 
 if [ -n "$IN_DOCKER" ] 
