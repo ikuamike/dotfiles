@@ -105,6 +105,7 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export GOBIN=$HOME/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$GOBIN 
+export PATH=$PATH:$HOME/.local/bin
 
 # Subdomain Enum with crt.sh 
 crtsh () {
