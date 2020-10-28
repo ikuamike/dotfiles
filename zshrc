@@ -6,6 +6,8 @@ export ZSH="${HOME}/.oh-my-zsh"
 export IS_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 
 unsetopt nomatch
+setopt inc_append_history
+setopt share_history  
 
 # Set zsh theme 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -106,6 +108,7 @@ export GOROOT=/usr/local/go
 export GOBIN=$HOME/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$GOBIN 
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/opt/jdk-11.0.9+11/bin
 
 # Subdomain Enum with crt.sh 
 crtsh () {
@@ -113,7 +116,7 @@ curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep -v crt.sh | gre
 }
 
 jadx-gui () {
-nohup jadx-gui-1.1.0.jar $1 &>/dev/null &
+nohup jadx-gui $1 &>/dev/null &
 }
 
 burp () {
@@ -123,7 +126,7 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
 	echo ""
 else
-        if [ -d ~/.axiom ];then
-                source ~/dotfiles/axiom.zsh
-        fi
+	if [ -d ~/.axiom ]; then
+		source ~/dotfiles/axiom.zsh
+	fi
 fi
