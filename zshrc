@@ -97,7 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-
+#
+source ~/dotfiles/aliases.zsh
 alias htb="cd ~/HTB; tmux rename-window 'vpn'; openvpn ikuamike.ovpn &; tmux new-window -c ~/HTB/Boxes"
 alias open="xdg-open"
 # rshell variables
@@ -109,7 +110,7 @@ export GOBIN=$HOME/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$GOBIN 
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/opt/jdk-11.0.9+11/bin
-export PATH=$PATH:.gem/ruby/2.7.0/bin
+export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 
 # Subdomain Enum with crt.sh 
 crtsh () {
