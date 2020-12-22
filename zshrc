@@ -24,7 +24,7 @@ POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND="white"
 POWERLEVEL9K_ROOT_ICON='%B#'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context background_jobs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip context virtualenv background_jobs)
 
 if [ "$IS_DOCKER" ] ; then
 	POWERLEVEL9K_DISABLE_GITSTATUS=true
@@ -99,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 #
 #
 source ~/dotfiles/aliases.zsh
-alias htb="cd ~/HTB; tmux rename-window 'vpn'; openvpn ikuamike.ovpn &; tmux new-window -c ~/HTB/Boxes"
+alias htb="cd ~/HTB; tmux rename-window 'vpn'; sudo openvpn ikuamike.ovpn &; tmux new-window -c ~/HTB/Boxes"
 alias open="xdg-open"
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
@@ -111,6 +111,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$GOBIN
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/opt/jdk-11.0.9+11/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
+export PATH=$PATH:$HOME/.ipi/bin
 
 # Subdomain Enum with crt.sh 
 crtsh () {
