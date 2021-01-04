@@ -100,10 +100,14 @@ source $ZSH/oh-my-zsh.sh
 #
 source ~/dotfiles/aliases.zsh
 alias htb="cd ~/HTB; tmux rename-window 'vpn'; sudo openvpn ikuamike.ovpn &; tmux new-window -c ~/HTB/Boxes"
+alias dante="cd ~/HTB/Prolabs/Dante; tmux rename-window 'dante-vpn'; sudo openvpn eu-dante-1-ikuamike.ovpn &; tmux new-window -c ~/HTB/Prolabs/Dante"
 alias open="xdg-open"
+alias nssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
+
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
 
+# PATH variables
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export GOBIN=$HOME/bin
