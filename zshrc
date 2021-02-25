@@ -98,10 +98,6 @@ source $ZSH/oh-my-zsh.sh
 #
 #
 source ~/dotfiles/aliases.zsh
-alias htb="cd ~/HTB; tmux rename-window 'vpn'; sudo openvpn ikuamike.ovpn &; tmux new-window -c ~/HTB/Boxes"
-alias dante="cd ~/HTB/Prolabs/Dante; tmux rename-window 'dante-vpn'; sudo openvpn eu-dante-1-ikuamike.ovpn &; tmux new-window -c ~/HTB/Prolabs/Dante"
-alias open="xdg-open"
-alias nssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
 
 # rshell variables
 export RSHELL_PORT="/dev/ttyUSB0"
@@ -116,11 +112,7 @@ export PATH=$PATH:/opt/jdk-11.0.9+11/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.ipi/bin
 
-# Subdomain Enum with crt.sh 
-crtsh () {
-curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep -v crt.sh | grep -v 'Identity LIKE' | grep $1
-}
-
+# functions
 jadx-gui () {
 nohup jadx-gui $1 &>/dev/null &
 }
