@@ -1,3 +1,6 @@
 [user]
-    name = ikuamike
+    name = Michael Ikua
     email = 5783614+ikuamike@users.noreply.github.com
+    username = ikuamike
+[core]
+    editor = vim
