@@ -147,6 +147,9 @@ if [ ! -d ~/.fzf ]; then
 else
     printf "${Green}[*] fzf already installed...skipping${Color_Off}\n"
 fi
+#==================#
+#     terminal     #
+#==================#
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
@@ -155,6 +158,9 @@ else
 	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
 	echo 36 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 fi
+#==================#
+#       tmux       #
+#==================#
 
 if [ -n "$IN_DOCKER" ] 
 then
