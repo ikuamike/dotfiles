@@ -18,7 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 "My plugins
 Plugin 'itchyny/lightline.vim'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-fugitive'
 Plugin 'psliwka/vim-smoothie'
 Plugin 'tmhedberg/SimpylFold'
 "Plugin 'Valloric/YouCompleteMe'
