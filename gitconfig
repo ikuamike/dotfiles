@@ -4,4 +4,6 @@
 [core]
     editor = vim
 [http]
-	postBuffer = 524288000
+    postBuffer = 524288000
+[ssh]
+    postBuffer = 524288000
