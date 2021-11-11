@@ -102,6 +102,7 @@ set undodir=~/.vim/undo//
 " Enable line numbers
 set nonumber
 set relativenumber
+
 " Make tabs as wide as four spaces
 "set tabstop=4
 
@@ -133,6 +134,7 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab 
 autocmd FileType sh setlocal shiftwidth=4 tabstop=4 
 autocmd FileType zsh setlocal shiftwidth=4 tabstop=4
+autocmd FileType c setlocal shiftwidth=4 tabstop=4
 
 " Add optional packages.
 "
