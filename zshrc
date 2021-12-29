@@ -60,6 +60,7 @@ plugins=(
   tmux
   zsh-syntax-highlighting
   docker
+  python
 )
 
 source $ZSH/oh-my-zsh.sh
