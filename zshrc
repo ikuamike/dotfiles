@@ -50,6 +50,8 @@ ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
+apt_pref="apt"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -61,6 +63,8 @@ plugins=(
   zsh-syntax-highlighting
   docker
   python
+  debian
+  encode64
 )
 
 source $ZSH/oh-my-zsh.sh
