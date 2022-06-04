@@ -31,6 +31,10 @@ cp -f "${HOME}/.tmux.conf" "${HOME}/.tmux.conf.bak" 2>/dev/null || true
 ln -sf "${HOME}"/dotfiles/tmux/tmux.conf "${HOME}"/.tmux.conf;
 ln -sf "${HOME}"/dotfiles/tmux/tmux.remote.conf "${HOME}"/.tmux/tmux.remote.conf;
 
+# Install dependencies
+printf "Installing dependencies\n"
+sudo apt install gawk net-tools coreutils
+
 # Install TPM plugins.
 # TPM requires running tmux server, as soon as `tmux start-server` does not work
 # create dump __noop session in detached mode, and kill it when plugins are installed
