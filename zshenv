@@ -1,7 +1,6 @@
 # added by Miniconda3 installer
 export PATH="/home/ikuamike/miniconda3/bin:$PATH"
 
-if type xcape &>/dev/null 
-then
-xcape -e 'Control_L=Escape'
-fi
+xcape -e 'Control_L=Escape' 2>/dev/null
+/usr/bin/setxkbmap -option 'shift:both_capslock' 2>/dev/null
+
