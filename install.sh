@@ -174,3 +174,9 @@ if [ "$(basename "$SHELL")" != "zsh" ]; then
     chsh -s $(which zsh)
 fi
 
+#==================#
+#       extras     #
+#==================#
+
+# setup ctrl as capslock and disable capslock, use both shift key to toggle capslock
+dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps', 'shift:both_capslock']"
