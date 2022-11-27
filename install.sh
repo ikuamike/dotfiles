@@ -179,4 +179,7 @@ fi
 #==================#
 
 # setup ctrl as capslock and disable capslock, use both shift key to toggle capslock
-dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps', 'shift:both_capslock']"
+if command -v dconf &> /dev/null
+then
+	dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps', 'shift:both_capslock']"
+fi
