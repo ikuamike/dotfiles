@@ -57,8 +57,11 @@ install git
 install tmux
 install zsh
 install vim
-install dconf-cli 
-install uuid-runtime
+
+printf "${Yellow}[+] Installing dconf-cli... ${Color_Off}\n"
+sudo apt install dconf-cli -y &>/dev/null
+printf "${Yellow}[+] Installing uuid-runtime... ${Color_Off}\n"
+sudo apt install uuid-runtime -y &>/dev/null
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
