@@ -57,6 +57,8 @@ install git
 install tmux
 install zsh
 install vim
+install dconf-cli 
+install uuid-runtime
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
@@ -156,7 +158,7 @@ then
 	echo ""
 else
 	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
-	echo 36 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
+	echo 48 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 fi
 #==================#
 #       tmux       #
