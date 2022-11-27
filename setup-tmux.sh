@@ -33,7 +33,7 @@ ln -sf "${HOME}"/dotfiles/tmux/tmux.remote.conf "${HOME}"/.tmux/tmux.remote.conf
 
 # Install dependencies
 printf "Installing dependencies\n"
-sudo apt install gawk net-tools coreutils
+sudo apt install gawk net-tools coreutils -y
 
 # Install TPM plugins.
 # TPM requires running tmux server, as soon as `tmux start-server` does not work
