@@ -29,7 +29,7 @@ IN_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 #   functions      #
 #==================#
 install () {
-if ! apt list --installed | grep -w "^$1" &> /dev/null
+if ! apt list --installed 2>&1 | grep -w "^$1" &> /dev/null
 then
     printf "\n${Red}[-] $1 could not be found ${Color_Off}\n"
     printf "${Yellow}[+] Installing $1... ${Color_Off}\n"
