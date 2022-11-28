@@ -51,8 +51,6 @@ ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
 
 printf "\n${BWhite}[*] Setting up your terminal... ${Color_Off}\n"
 
-printf "\n${BGreen}[*] Installing dependencies... ${Color_Off}\n"
-
 install curl
 install git
 install tmux
