@@ -29,7 +29,7 @@ IN_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 #   functions      #
 #==================#
 install () {
-if ! command -v $1 &> /dev/null
+if ! apt list --installed | grep -w "^$1" &> /dev/null
 then
     printf "\n${Red}[-] $1 could not be found ${Color_Off}\n"
     printf "${Yellow}[+] Installing $1... ${Color_Off}\n"
@@ -42,6 +42,7 @@ else
     printf "${Green}[*] $1 already installed...skipping ${Color_Off}\n"
 fi
 }
+
 configure () {
 printf "${Blue}[+] Configuring $1: ${White}Creating $1rc symlink to ~/.$1rc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/$1rc ~/.$1rc
@@ -57,11 +58,9 @@ install git
 install tmux
 install zsh
 install vim
-
-printf "${Yellow}[+] Installing dconf-cli... ${Color_Off}\n"
-sudo apt install dconf-cli -y &>/dev/null
-printf "${Yellow}[+] Installing uuid-runtime... ${Color_Off}\n"
-sudo apt install uuid-runtime -y &>/dev/null
+install gawk
+install net-tools
+install coreutils
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
@@ -69,6 +68,8 @@ then
 else
 	install xcape
 	install xclip
+	install dconf-cli
+	install uuid-runtime
 fi
 
 
@@ -163,6 +164,7 @@ else
 	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
 	echo 48 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 fi
+
 #==================#
 #       tmux       #
 #==================#
@@ -172,7 +174,40 @@ then
 	echo ""
 else
 	printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
-	${HOME}/dotfiles/setup-tmux.sh
+	
+	#setup-tmux.sh
+	set -e
+	set -u
+	set -o pipefail
+
+	REPODIR="$(cd "$(dirname "$0")"; pwd -P)"
+	cd "$REPODIR";
+
+	if [ ! -e "${HOME}/.tmux/plugins/tpm" ]; then
+	  printf "\n${Red}[-] WARNING: Cannot find TPM (Tmux Plugin Manager) \
+	 at default location: ${HOME}/.tmux/plugins/tpm.${Color_Off}\n"
+	  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	fi
+
+	if [ -e "${HOME}/.tmux.conf" ]; then
+	  printf "[+] Found existing .tmux.conf in your ${HOME} directory. Will create a backup at ${HOME}/.tmux.conf.bak\n"
+	fi
+
+	cp -f "${HOME}/.tmux.conf" "${HOME}/.tmux.conf.bak" 2>/dev/null || true
+	ln -sf "${HOME}"/dotfiles/tmux/tmux.conf "${HOME}"/.tmux.conf;
+	ln -sf "${HOME}"/dotfiles/tmux/tmux.remote.conf "${HOME}"/.tmux/tmux.remote.conf;
+
+	# Install TPM plugins.
+	# TPM requires running tmux server, as soon as `tmux start-server` does not work
+	# create dump __noop session in detached mode, and kill it when plugins are installed
+	printf "[+] Installing TPM plugins\n"
+	tmux new -d -s __noop >/dev/null 2>&1 || true 
+	tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "~/.tmux/plugins"
+	"${HOME}"/.tmux/plugins/tpm/bin/install_plugins || true
+	tmux kill-session -t __noop >/dev/null 2>&1 || true
+
+	printf "${Green}[*] OK: Completed${Color_Off}\n"
+	
 fi
 
 if [ "$(basename "$SHELL")" != "zsh" ]; then
