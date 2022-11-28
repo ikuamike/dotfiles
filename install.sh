@@ -44,7 +44,7 @@ fi
 }
 
 configure () {
-printf "${Blue}[+] Configuring $1: ${White}Creating $1rc symlink to ~/.$1rc ... ${Color_Off}\n"
+printf "${BBlue}[+] Configuring $1: ${White}Creating $1rc symlink to ~/.$1rc ... ${Color_Off}\n"
 ln -sf ~/dotfiles/$1rc ~/.$1rc
 }
 ZSH_CUSTOM=${HOME}/.oh-my-zsh/custom
@@ -161,7 +161,7 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
 	echo ""
 else
-	printf "${Blue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
+	printf "${BBlue}[+] Setting up Dracula terminal theme... ${Color_Off}\n"
 	echo 48 | bash -c  "$(curl -sLo- https://git.io/vQgMr)" &>/dev/null
 fi
 
@@ -173,7 +173,7 @@ if [ -n "$IN_DOCKER" ]
 then
 	echo ""
 else
-	printf "${Blue}[+] Setting up tmux... ${Color_Off}\n"
+	printf "${BBlue}[+] Setting up tmux... ${Color_Off}\n"
 	
 	#setup-tmux.sh
 	set -e
