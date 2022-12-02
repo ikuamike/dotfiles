@@ -11,6 +11,7 @@ alias dkcpdown="docker-compose down"
 alias dkcpstart="docker-compose start"
 alias dkcpstop="docker-compose stop"
 
+# Others
 alias msfconsole="msfconsole -q"
 alias open="xdg-open"
 alias nssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
