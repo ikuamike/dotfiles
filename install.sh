@@ -59,6 +59,7 @@ install vim
 install gawk
 install net-tools
 install coreutils
+install neovim
 
 if [ -n "$SSH_CONNECTION" ] || [ -n "$IS_DOCKER" ]
 then
@@ -108,7 +109,7 @@ mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
 mkdir -p ${HOME}/.vim/undo
 configure vim
-vim +PluginList +qall --not-a-term &>/dev/null
+nvim +PluginList +qall >/dev/null
 
 #==================#
 #     ohmyzsh      #
