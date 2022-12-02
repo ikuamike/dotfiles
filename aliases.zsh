@@ -16,3 +16,4 @@ alias open="xdg-open"
 alias nssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
 alias bat='batcat'
 alias fixvbox="sudo sed -i s/'Exec=VirtualBox %U'/'Exec=VirtualBox -style Fusion %U'/ /usr/share/applications/virtualbox.desktop"
+alias vim='nvim'
