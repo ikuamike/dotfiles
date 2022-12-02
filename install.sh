@@ -109,7 +109,7 @@ mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
 mkdir -p ${HOME}/.vim/undo
 configure vim
-nvim +PluginList +qall >/dev/null
+nvim +PluginList +qall &>/dev/null
 
 #==================#
 #     ohmyzsh      #
