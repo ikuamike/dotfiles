@@ -209,10 +209,6 @@ else
 	
 fi
 
-if [ "$(basename "$SHELL")" != "zsh" ]; then
-    chsh -s $(which zsh)
-fi
-
 #==================#
 #       extras     #
 #==================#
@@ -221,4 +217,11 @@ fi
 if command -v dconf &> /dev/null
 then
 	dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:nocaps', 'shift:both_capslock']"
+fi
+
+
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+    if grep $(whoami) /etc/passwd &>/dev/null; then 
+        chsh -s $(which zsh)
+    fi
 fi
