@@ -21,6 +21,12 @@ I use [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) and all plugins com
 - Git
 - Tmux
 
+#### Quick Install
+
+```bash
+bash -c "$(wget -qO- https://raw.githubusercontent.com/ikuamike/dotfiles/master/install.sh)"
+```
+
 ## Inspiration
 
 [@mathiasbynens](https://github.com/mathiasbynens) [dotfiles](https://github.com/mathiasbynens/dotfiles).
