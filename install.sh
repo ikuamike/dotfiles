@@ -23,6 +23,8 @@ BPurple='\033[1;35m'      # Purple
 BCyan='\033[1;36m'        # Cyan
 BWhite='\033[1;37m'       # White
 
+[ -d ~/dotfiles ] && git clone git@github.com:ikuamike/dotfiles.git
+
 IN_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
 
 #==================#
