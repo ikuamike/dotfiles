@@ -57,7 +57,7 @@ install curl
 install git
 install tmux
 install zsh
-install vim
+install nvim
 install gawk
 install net-tools
 install coreutils
@@ -97,9 +97,10 @@ fi
 #==================#
 #     vundle       #
 #==================#
-if [ ! -d ${HOME}/.vim/bundle ]; then
+if [ ! -d ${HOME}/.config/nvim/bundle/Vundle.vim ]; then
     printf "${Yellow}[+] Installing vundle... ${Color_Off}\n"
-    git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    # git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    git clone --quiet https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
 else
     printf "${Green}[*] Vundle already installed...skipping${Color_Off}\n"
 fi
@@ -110,7 +111,7 @@ fi
 mkdir -p ${HOME}/.vim/backups
 mkdir -p ${HOME}/.vim/swaps
 mkdir -p ${HOME}/.vim/undo
-configure vim
+ln -sf ~/dotfiles/vimrc ~/.config/nvim/init.vim
 nvim +PluginList +qall &>/dev/null
 
 #==================#
