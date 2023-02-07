@@ -65,6 +65,7 @@ plugins=(
   python
   debian
   encode64
+  colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
