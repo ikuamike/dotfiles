@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+printf '\n%.0s' {1..100} # send prompt to bottom of the terminal
+
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
 export IS_DOCKER=$(awk -F/ '$2 == "docker"' /proc/self/cgroup)
@@ -12,17 +14,24 @@ setopt share_history
 # Set zsh theme 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Powerlevel configs
+## Powerlevel10K configs
 
+# VPN
 POWERLEVEL9K_VPN_IP_FOREGROUND="green"
 POWERLEVEL9K_VPN_IP_BACKGROUND="black"
-POWERLEVEL9K_CONTEXT_TEMPLATE="`[ -n "$IS_DOCKER" ] && echo docker \~\ $(hostname) || echo ssh \~\ $(hostname)`"
-typeset -g POWERLEVEL9K_CONTEXT_DEFAULT_CONTENT_EXPANSION=
+POWERLEVEL9K_VPN_IP_INTERFACE="tun.*|tap.*"
+POWERLEVEL9K_VPN_IP_SHOW_ALL=true
+POWERLEVEL9K_VPN_IP_VISUAL_IDENTIFIER_EXPANSION=''
 
+# Context
+POWERLEVEL9K_CONTEXT_TEMPLATE="`[ -n "$IS_DOCKER" ] && echo docker \~\ $(hostname) || [ -n "$SSH_CONNECTION" ] && echo ssh \~\ $(hostname)`"
+
+# Root
 POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
 POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND="white"
 POWERLEVEL9K_ROOT_ICON='%B#'
 
+#Prompt
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context root_indicator dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vpn_ip virtualenv background_jobs)
 
