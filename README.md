@@ -1,4 +1,4 @@
-My setup is used on debian based distros such as Ubuntu and Kali Linux at the moment.
+My setup is used on Ubuntu and Kali Linux running Gnome DE.
 
 ![terminal](https://github.com/ikuamike/dotfiles/blob/master/Screenshots/terminal.png)
 
